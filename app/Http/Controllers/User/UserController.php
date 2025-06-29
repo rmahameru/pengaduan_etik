@@ -313,7 +313,7 @@ class UserController extends Controller
             'isi_laporan' => $data['isi_laporan'],
             'tgl_kejadian' => $data['tgl_kejadian'],
             'lokasi_kejadian' => $data['lokasi_kejadian'],
-            // 'id_kategori' => $data['kategori_kejadian'],
+            'id_kategori' => $data['kategori_kejadian'],
             'foto' => $data['foto'] ?? $pengaduan->foto
         ]);
 

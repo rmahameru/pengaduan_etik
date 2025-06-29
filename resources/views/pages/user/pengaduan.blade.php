@@ -8,22 +8,48 @@
     <section class="inner-page">
       <div class="container ">
         <div class="title text-center mb-5">
-            <h3 class="fw-bold">Layanan Pengaduan Masyarakat</h3>
-            <h5 class="fw-normal">Sampaikan laporan Anda langsung kepada instansi pemerintah berwenang</h5>
+            <h3 class="fw-bold">Layanan Pengaduan Etik</h3>
+            <h5 class="fw-normal">Sampaikan laporan Anda langsung kepada Direktur Poltekkes Kemenkes Surabaya</h5>
         </div>
        <div class="card card-responsive p-4 border-0 col-md-8 shadow rounded mx-auto">
         <form action="{{ route('pengaduan.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-3">
-                <label for="judul_laporan" class="form-label">Judul Laporan</label>
-                <input type="text" value="{{ old('judul_laporan') }}" name="judul_laporan" id="judul_laporan"
-                    placeholder="Ketik Judul Pengaduan" class="form-control @error('judul_laporan') is-invalid @enderror" required >
-                @error('judul_laporan')
+                <label for="nama_pelapor" class="form-label">Nama Pelapor</label>
+                <input type="text" value="{{ old('nama_pelapor') }}" name="nama_pelapor" id="nama_pelapor"
+                    placeholder="Ketik Nama Pelapor" class="form-control @error('nama_pelapor') is-invalid @enderror" required >
+                @error('nama_pelapor')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+            <div class="form-group mb-3">
+                <label for="nama_pelanggar" class="form-label">Nama Pelanggar</label>
+                <input type="text" value="{{ old('nama_pelanggar') }}" name="nama_pelanggar" id="nama_pelanggar"
+                    placeholder="Ketik Nama Pelanggar" class="form-control @error('nama_pelanggar') is-invalid @enderror" required >
+                @error('nama_pelanggar')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group mb-3">
+                <label for="kategori_pelanggaran" class="form-label">Kategori Pelanggaran</label>
+                <select name="kategori_pelanggaran" id="kategori_pelanggaran" class="form-control @error('kategori_pelanggaran') is-invalid @enderror" required>
+                    <option value="" disabled {{ old('kategori_pelanggaran') ? '' : 'selected' }}>-- Pilih Kategori --</option>
+                    <option value="Berpakaian tidak sesuai aturan" {{ old('kategori_pelanggaran') == 'Berpakaian tidak sesuai aturan' ? 'selected' : '' }}>Berpakaian tidak sesuai aturan</option>
+                    <option value="Perilaku tidak sopan" {{ old('kategori_pelanggaran') == 'Perilaku tidak sopan' ? 'selected' : '' }}>Perilaku tidak sopan</option>
+                    <option value="Terlambat" {{ old('kategori_pelanggaran') == 'Terlambat' ? 'selected' : '' }}>Terlambat</option>
+                    <option value="Lainnya" {{ old('kategori_pelanggaran') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                </select>
+                @error('kategori_pelanggaran')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <div class="form-group mb-3">
                 <label for="isi_laporan" class="form-label">Isi Laporan</label>
                 <textarea name="isi_laporan" id="isi_laporan"
@@ -67,7 +93,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">KIRIM</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
 
         </form>
        </div>

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +78,25 @@ Route::prefix('admin')->group( function() {
     Route::middleware(['isGuest'])->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'formLogin'])->name('admin.masuk');
         Route::post('/login', [\App\Http\Controllers\Admin\AdminController::class, 'login'])->name('admin.login');
+        Route::get('/view-sop', function () {
+    $filePath = public_path('storage/assets/SOP/SOP Penanganan Pelanggaran Kode Etik Tendik.pdf');
+
+    return Response::file($filePath, [
+        'Content-Type'        => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="SOP Penanganan Pelanggaran Kode Etik Tendik.pdf"',
+    ]);
+});
+
+
+
+
+        //         Route::get('/view-pdf', function () {
+//     $filePath = public_path('storage/SOP/SOP Penanganan Pelanggaran Kode Etik Tendik.pdf');
+//     return response()->file($filePath, [
+//         'Content-Type' => 'application/pdf',
+//     ]);
+// });
+
     });
 });
 
