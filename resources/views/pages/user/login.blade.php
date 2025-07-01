@@ -62,11 +62,13 @@
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+              <img src="{{ asset('assets/img/Logo Poltekkes Kemenkes Surabaya.png') }}" alt="Logo" class="mb-4" style="max-height: 100px;">
               <h1 class="text-white">Login</h1>
               <p class="text-lead text-white">Silahkan login menggunakan akun yang sudah didaftarkan.</p>
             </div>
           </div>
         </div>
+
       </div>
       <div class="separator separator-bottom separator-skew zindex-100">
         <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">

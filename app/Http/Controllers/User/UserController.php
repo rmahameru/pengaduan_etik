@@ -154,14 +154,7 @@ class UserController extends Controller
             'jenis_kelamin' => ['required'],
             'password' => ['required', 'min:6'],
             'telp' => ['required', 'regex:/(08)[0-9]/'],
-            'alamat' => ['required'],
-            'rt' => ['required'],
-            'rw' => ['required'],
-            'kode_pos' => ['required'],
-            'province_id' => ['required'],
-            'regency_id' => ['required'],
-            'district_id' => ['required'],
-            'village_id' => ['required'],
+            
         ]);
 
         if ($validate->fails()) {
@@ -176,15 +169,9 @@ class UserController extends Controller
             'jenis_kelamin' => $data['jenis_kelamin'],
             'password' => Hash::make($data['password']),
             'telp' => $data['telp'],
-            'alamat' => $data['alamat'],
+            
             'email_verified_at' => Carbon::now(),
-            'rt' => $data['rt'],
-            'rw' => $data['rw'],
-            'kode_pos' => $data['kode_pos'],
-            'province_id' => $data['province_id'],
-            'regency_id' => $data['regency_id'],
-            'district_id' => $data['district_id'],
-            'village_id' => $data['village_id'],
+           
         ]);
 
         $masyarakat = Masyarakat::where('email', $data['email'])->first();
@@ -313,7 +300,7 @@ class UserController extends Controller
             'isi_laporan' => $data['isi_laporan'],
             'tgl_kejadian' => $data['tgl_kejadian'],
             'lokasi_kejadian' => $data['lokasi_kejadian'],
-            'id_kategori' => $data['kategori_kejadian'],
+            // 'id_kategori' => $data['kategori_kejadian'],
             'foto' => $data['foto'] ?? $pengaduan->foto
         ]);
 
@@ -424,14 +411,7 @@ class UserController extends Controller
             'username' => ['sometimes', 'required', 'string', 'regex:/^\S*$/u', Rule::unique('masyarakat')->ignore($nik, 'nik'), 'unique:petugas,username'],
             'jenis_kelamin' => ['required'],
             'telp' => ['required', 'regex:/(08)[0-9]/'],
-            'alamat' => ['required'],
-            'rt' => ['required'],
-            'rw' => ['required'],
-            'kode_pos' => ['required'],
-            'province_id' => ['required'],
-            'regency_id' => ['required'],
-            'district_id' => ['required'],
-            'village_id' => ['required'],
+            
         ]);
 
         if ($validate->fails()) {
@@ -447,14 +427,7 @@ class UserController extends Controller
             'username' => strtolower($data['username']),
             'jenis_kelamin' => $data['jenis_kelamin'],
             'telp' => $data['telp'],
-            'alamat' => $data['alamat'],
-            'rt' => $data['rt'],
-            'rw' => $data['rw'],
-            'kode_pos' => $data['kode_pos'],
-            'province_id' => $data['province_id'],
-            'regency_id' => $data['regency_id'],
-            'district_id' => $data['district_id'],
-            'village_id' => $data['village_id'],
+            
         ]);
         return redirect()->back()->with(['pesan' => 'Profil berhasil diubah!', 'type' => 'success']);
     }

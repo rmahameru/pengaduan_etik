@@ -62,9 +62,11 @@
     <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
       <div class="container">
         <div class="header-body text-center mb-7">
+
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-              <h1 class="text-white">Login Sebagai Petugas</h1>
+              <img src="{{ asset('assets/img/Logo Poltekkes Kemenkes Surabaya.png') }}" alt="Logo" class="mb-4" style="max-height: 100px;">
+              <h1 class="text-white">Login</h1>
               <p class="text-lead text-white">Silahkan login menggunakan akun yang sudah didaftarkan.</p>
             </div>
           </div>

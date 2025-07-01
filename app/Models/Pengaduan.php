@@ -18,6 +18,7 @@ class Pengaduan extends Model
         'nik',
         'judul_laporan',
         'isi_laporan',
+        'kategori_laporan',
         'tgl_kejadian',
         'lokasi_kejadian',
         'foto',

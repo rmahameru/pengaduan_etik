@@ -19,7 +19,7 @@
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="/">
-        Pengaduan Masyarakat
+        Pokesbaya Beretika
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -66,8 +66,10 @@
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+              <img src="{{ asset('assets/img/Logo Poltekkes Kemenkes Surabaya.png') }}" alt="Logo" class="mb-4" style="max-height: 100px;">
               <h1 class="text-white">Register</h1>
               <p class="text-lead text-white">Silahkan isi form dibawah ini untuk membuat akun baru.</p>
+            </div>
             </div>
           </div>
         </div>
@@ -136,16 +138,7 @@
                     @enderror
                   </div>
                 </div>
-                {{-- <div class="form-group">
-                  <div class="input-group input-group-merge input-group-alternative mb-3">
-                    <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat" placeholder="Alamat">{{ old('alamat') }}</textarea>
-                    @error('alamat')
-                      <div class="invalid-feedback">
-                        {{ $message }}
-                      </div>
-                    @enderror
-                  </div>
-                </div> --}}
+                
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative mb-3">
                     <select name="jenis_kelamin" class="custom-select @error('jenis_kelamin') is-invalid @enderror">

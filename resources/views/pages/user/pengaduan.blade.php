@@ -17,8 +17,22 @@
             <div class="form-group mb-3">
                 <label for="nama_pelapor" class="form-label">Nama Pelapor</label>
                 <input type="text" value="{{ old('nama_pelapor') }}" name="nama_pelapor" id="nama_pelapor"
-                    placeholder="Ketik Nama Pelapor" class="form-control @error('nama_pelapor') is-invalid @enderror" required >
+                    placeholder="Nama Pelapor" class="form-control @error('nama_pelapor') is-invalid @enderror" required >
                 @error('nama_pelapor')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+             <div class="form-group mb-3">
+                <label for="status_civitas" class="form-label">Status Pelanggar</label>
+                <select name="status_civitas" id="status_civitas" class="form-control @error('status_civitas') is-invalid @enderror" required>
+                    <option value="" disabled {{ old('status_civitas') ? '' : 'selected' }}>-- Pilih Status --</option>
+                    <option value="Dosen" {{ old('status_civitas') == 'Dosen' ? 'selected' : '' }}>Dosen</option>
+                    <option value="Tenaga Kependidikan" {{ old('status_civitas') == 'Tenaga Kependidikan' ? 'selected' : '' }}>Tenaga Kependidikan</option>
+                    
+                </select>
+                @error('status_civitas')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -27,7 +41,7 @@
             <div class="form-group mb-3">
                 <label for="nama_pelanggar" class="form-label">Nama Pelanggar</label>
                 <input type="text" value="{{ old('nama_pelanggar') }}" name="nama_pelanggar" id="nama_pelanggar"
-                    placeholder="Ketik Nama Pelanggar" class="form-control @error('nama_pelanggar') is-invalid @enderror" required >
+                    placeholder="Nama Pelanggar" class="form-control @error('nama_pelanggar') is-invalid @enderror" required >
                 @error('nama_pelanggar')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -53,7 +67,7 @@
             <div class="form-group mb-3">
                 <label for="isi_laporan" class="form-label">Isi Laporan</label>
                 <textarea name="isi_laporan" id="isi_laporan"
-                    placeholder="Ketik isi Pengaduan" rows="5" class="form-control @error('isi_laporan') is-invalid @enderror" required>{{ old('isi_laporan') }}</textarea>
+                    placeholder="Silahkan isi Pengaduan" rows="5" class="form-control @error('isi_laporan') is-invalid @enderror" required>{{ old('isi_laporan') }}</textarea>
                 @error('isi_laporan')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -76,7 +90,7 @@
             <div class="form-group mb-3">
                 <label for="lokasi_kejadian" class="form-label">Lokasi Kejadian</label>
                 <textarea name="lokasi_kejadian" id="lokasi_kejadian"
-                    placeholder="Ketik Lokasi Kejadian" rows="3" class="form-control @error('lokasi_kejadian') is-invalid @enderror" required>{{ old('lokasi_kejadian') }}</textarea>
+                    placeholder="Lokasi Kejadian" rows="3" class="form-control @error('lokasi_kejadian') is-invalid @enderror" required>{{ old('lokasi_kejadian') }}</textarea>
                 @error('lokasi_kejadian')
                     <div class="invalid-feedback">
                         {{ $message }}

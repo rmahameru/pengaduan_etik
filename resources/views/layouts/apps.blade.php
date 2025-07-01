@@ -112,7 +112,7 @@
           </div> --}}
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Kontak</h4>
+            <h4>Customer Service</h4>
             <ul>
               <p>
                 <strong>Phone:</strong> 087850543457<br>
@@ -133,7 +133,7 @@
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="https://github.com/BayuPrayoga62" class="github"><i class="bx bxl-github"></i></a>
+        <a href="https://github.com/rmahameru" class="github"><i class="bx bxl-github"></i></a>
         <a href="https://www.instagram.com/polkessbaya/" class="instagram"><i class="bx bxl-instagram"></i></a>
         <!-- <a href="https://www.linkedin.com/in/bayu-prayoga-b000a121a/" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
       </div>
