@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Mar 2024 pada 15.47
--- Versi server: 10.4.27-MariaDB
--- Versi PHP: 7.4.33
+-- Waktu pembuatan: 14 Jul 2025 pada 10.36
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -14502,32 +14502,35 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `masyarakat` (
   `nik` char(16) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` datetime NOT NULL,
+  `user` varchar(50) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `email_verified_at` datetime DEFAULT NULL,
   `username` varchar(25) NOT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `password` varchar(255) NOT NULL,
-  `telp` varchar(13) NOT NULL,
-  `alamat` varchar(13) NOT NULL,
-  `rt` char(4) NOT NULL,
-  `rw` char(4) NOT NULL,
-  `kode_pos` char(5) NOT NULL,
-  `province_id` char(2) NOT NULL,
-  `regency_id` char(4) NOT NULL,
-  `district_id` char(7) NOT NULL,
-  `village_id` char(10) NOT NULL,
+  `telp` varchar(13) DEFAULT NULL,
+  `alamat` varchar(13) DEFAULT NULL,
+  `rt` char(4) DEFAULT NULL,
+  `rw` char(4) DEFAULT NULL,
+  `kode_pos` char(5) DEFAULT NULL,
+  `province_id` char(2) DEFAULT NULL,
+  `regency_id` char(4) DEFAULT NULL,
+  `district_id` char(7) DEFAULT NULL,
+  `village_id` char(10) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `masyarakat`
 --
 
-INSERT INTO `masyarakat` (`nik`, `name`, `email`, `email_verified_at`, `username`, `jenis_kelamin`, `password`, `telp`, `alamat`, `rt`, `rw`, `kode_pos`, `province_id`, `regency_id`, `district_id`, `village_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-('3275072410980072', 'User', 'user@gmail.com', '2024-01-05 15:30:06', 'user', 'Laki-laki', '$2y$10$KwX.ABmEPtBgdc.S2N00rukkd7NXV9E0WQDo9FpXJzznvisayFaG.', '089123456782', 'Bandung', '001', '010', '40397', '32', '3204', '3204101', '3204101003', NULL, '2024-01-05 08:30:06', '2024-01-05 08:30:06');
+INSERT INTO `masyarakat` (`nik`, `user`, `email`, `email_verified_at`, `username`, `jenis_kelamin`, `password`, `telp`, `alamat`, `rt`, `rw`, `kode_pos`, `province_id`, `regency_id`, `district_id`, `village_id`, `remember_token`, `created_at`, `updated_at`, `name`) VALUES
+('3275072410980072', 'User', 'user@gmail.com', '2024-01-05 15:30:06', 'user', 'Laki-laki', '$2y$10$KwX.ABmEPtBgdc.S2N00rukkd7NXV9E0WQDo9FpXJzznvisayFaG.', '089123456782', 'Bandung', '001', '010', '40397', '32', '3204', '3204101', '3204101003', NULL, '2024-01-05 08:30:06', '2024-01-05 08:30:06', 'User'),
+('3313115469874445', NULL, 'rizkikaabiyyu@polkesbaya.ac.id', NULL, 'userbot', 'Perempuan', '$2y$10$sLJELLN/NQ1DuyqkEZaHiegx0yIh64q9NmZ0vyCZ204M/goI1XpoC', '08775412541', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-07-11 01:56:07', '2025-07-11 01:56:07', 'user bot'),
+('3313120303970005', 'Rizkika', 'rizkikaagm@gmail.com', '2025-07-02 07:02:28', 'rizkika', 'Laki-laki', '$2y$10$5nHWJIqAxj7pfr09POmY0.4rnAo9j67aP6oDQLJ3L5t6XTRSFLHvC', '08888888888', 'solo', '04', '09', '57172', '33', '3313', '3313120', '3313120011', NULL, '2025-07-02 00:02:28', '2025-07-02 00:02:28', 'Rizkika');
 
 -- --------------------------------------------------------
 
@@ -14578,24 +14581,43 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `pengaduan` (
   `id_pengaduan` bigint(20) UNSIGNED NOT NULL,
-  `tgl_pengaduan` datetime NOT NULL,
+  `tgl_pengaduan` datetime NOT NULL DEFAULT current_timestamp(),
   `nik` char(16) NOT NULL,
-  `judul_laporan` varchar(255) NOT NULL,
+  `kategori_pelanggaran` varchar(255) DEFAULT NULL,
   `isi_laporan` text NOT NULL,
   `tgl_kejadian` datetime NOT NULL,
   `lokasi_kejadian` text NOT NULL,
   `foto` varchar(255) NOT NULL,
   `status` enum('0','proses','selesai') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `nama_pelapor` varchar(255) DEFAULT NULL,
+  `nama_pelanggar` varchar(255) DEFAULT NULL,
+  `status_civitas` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `pengaduan`
 --
 
-INSERT INTO `pengaduan` (`id_pengaduan`, `tgl_pengaduan`, `nik`, `judul_laporan`, `isi_laporan`, `tgl_kejadian`, `lokasi_kejadian`, `foto`, `status`, `created_at`, `updated_at`) VALUES
-(1, '2024-01-05 10:31:05', '3275072410980072', 'Pencurian LCD TV', 'Mohon Tindak Lanjuti', '2024-01-05 00:00:00', 'Rumah bapak xxx', 'assets/pengaduan/6hSihceaLSv5Pz1VUWyOCkd2PlRfxwemaQ7HPHob.jpg', 'selesai', '2024-01-05 15:31:05', '2024-01-05 08:38:56');
+INSERT INTO `pengaduan` (`id_pengaduan`, `tgl_pengaduan`, `nik`, `kategori_pelanggaran`, `isi_laporan`, `tgl_kejadian`, `lokasi_kejadian`, `foto`, `status`, `created_at`, `updated_at`, `id_user`, `nama_pelapor`, `nama_pelanggar`, `status_civitas`) VALUES
+(1, '2024-01-05 10:31:05', '3275072410980072', 'Pencurian LCD TV', 'Mohon Tindak Lanjuti', '2024-01-05 00:00:00', 'Rumah bapak xxx', 'assets/pengaduan/6hSihceaLSv5Pz1VUWyOCkd2PlRfxwemaQ7HPHob.jpg', 'selesai', '2024-01-05 15:31:05', '2024-01-05 08:38:56', 0, '', NULL, NULL),
+(2, '2025-07-03 08:29:37', '3313120303970005', 'Berpakaian tidak sesuai aturan', 'zxczxc', '2025-07-03 00:00:00', 'zxczxxcc', 'assets/pengaduan/LFfTT9frF9wUSeNcBlE90S0qQVDheCorlt4fYuBX.jpg', 'proses', '2025-07-03 01:29:37', '2025-07-14 00:02:00', 0, '', NULL, NULL),
+(3, '2025-07-03 09:39:16', '3313120303970005', 'Berpakaian tidak sesuai aturan', 'testes', '2025-07-03 00:00:00', 'cektes', 'assets/pengaduan/t7adxvTAfnaxl0qrbYUHmxu3OZV3wNLRhiQb58Mt.jpg', '0', '2025-07-03 02:39:16', '2025-07-03 02:39:16', 0, '', NULL, NULL),
+(4, '2025-07-03 10:29:23', '3275072410980072', 'Terlambat', 'cekcekcek', '2025-07-03 00:00:00', 'cekets', 'assets/pengaduan/vmgP8ayUYitRWKIpU0KvmU6WikGJQCOsRhLzLWqR.jpg', '0', '2025-07-03 03:29:23', '2025-07-03 03:29:23', NULL, '', NULL, NULL),
+(5, '2025-07-03 11:01:40', '3275072410980072', 'Perilaku tidak sopan', 'qwert', '2025-07-03 00:00:00', 'Sby', 'assets/pengaduan/rep2TtKfC9iyoFXkYuWnM7fHwnkpKJxKucKNGkAc.jpg', '0', '2025-07-03 04:01:40', '2025-07-03 04:01:40', NULL, '', NULL, NULL),
+(6, '2025-07-03 11:25:30', '3275072410980072', 'Berpakaian tidak sesuai aturan', 'baju hejo', '2025-07-03 00:00:00', 'rektorat', 'assets/pengaduan/xfZTgyOeWrysuYp1rVuYfWWY0wn3sTa8krpUSMKA.jpg', '0', '2025-07-03 04:25:30', '2025-07-03 04:25:30', NULL, NULL, NULL, NULL),
+(7, '2025-07-04 10:58:41', '3275072410980072', 'Berpakaian tidak sesuai aturan', 'ccc', '2025-07-04 00:00:00', 'cccc', 'assets/pengaduan/RTkSd5OckZYjFf1NlnfV2jsvt5lYeDNDLY5q53Lx.png', '0', '2025-07-04 03:58:41', '2025-07-04 03:58:41', NULL, NULL, NULL, NULL),
+(8, '2025-07-07 10:51:29', '3275072410980072', 'Berpakaian tidak sesuai aturan', 'cccc', '2025-07-07 00:00:00', 'ccasd', 'assets/pengaduan/0p6aQKOZ8KYXLAAiVdCAvlNwB3By6ZFizhFOXEB7.png', '0', '2025-07-07 03:51:29', '2025-07-07 03:51:29', NULL, NULL, NULL, NULL),
+(9, '2025-07-07 10:59:33', '3275072410980072', 'Terlambat', 'coba3', '2025-07-07 00:00:00', 'cob3', 'assets/pengaduan/3OJ0wqsfvjuA1zAlp1mLJfKiGTCr08C0yykD7iKs.png', '0', '2025-07-07 03:59:33', '2025-07-07 03:59:33', NULL, NULL, NULL, NULL),
+(10, '2025-07-08 07:49:40', '3275072410980072', 'Berpakaian tidak sesuai aturan', 'coba550', '2025-07-08 00:00:00', 'cobacoba', 'assets/pengaduan/jf5Cj6Z0HDPeeoa3NISyBQNnCZ2LFo0bSPJbpCMS.jpg', 'proses', '2025-07-08 00:49:40', '2025-07-13 21:14:46', NULL, NULL, NULL, NULL),
+(11, '2025-07-14 14:48:47', '3275072410980072', NULL, 'userxabcde', '2025-07-14 00:00:00', 'diuserb', 'assets/pengaduan/Un564GXRiEQI56rxp85dOa10WfWLKBz6ApPhFZBq.png', '0', '2025-07-14 07:48:47', '2025-07-14 07:48:47', NULL, 'user b', 'userx', 'Tenaga Kependidikan'),
+(12, '2025-07-14 14:55:04', '3275072410980072', NULL, 'tes dicoba pelanggar2', '2025-07-14 00:00:00', 'disinidisana', 'assets/pengaduan/UyRI7wSmDwSazEFgEeEUC9rUpDbmz9RXgnuNbt65.png', '0', '2025-07-14 07:55:04', '2025-07-14 07:55:04', NULL, 'User', 'Tes dicoba pelanggar', 'Dosen'),
+(13, '2025-07-14 14:57:38', '3275072410980072', NULL, 'user coba sore ini', '2025-07-14 00:00:00', 'cek cekk', 'assets/pengaduan/c6Iwq1jPUS2pxauIAqDByo5nGPgRoiO8YJ7cYwcW.jpg', '0', '2025-07-14 07:57:38', '2025-07-14 07:57:38', NULL, 'user sore', 'user cobacoba', 'Tenaga Kependidikan'),
+(14, '2025-07-14 14:59:23', '3275072410980072', NULL, 'tatata', '2025-07-14 00:00:00', 'wawawa', 'assets/pengaduan/VargQ5a8JK2RfCTD1hXxcdO6fSeMTcJlkB8uCRgL.jpg', '0', '2025-07-14 07:59:23', '2025-07-14 07:59:23', NULL, 'mamama', 'cacaca', 'Dosen'),
+(15, '2025-07-14 15:04:33', '3275072410980072', NULL, 'rarara', '2025-07-21 00:00:00', 'sasasa', 'assets/pengaduan/kliqCiRVrrbyPGtG7SB8l5GnB23WfADPjM7nCusk.jpg', '0', '2025-07-14 08:04:33', '2025-07-14 08:04:33', NULL, 'nanana', 'zazaza', 'Dosen'),
+(16, '2025-07-14 15:08:29', '3275072410980072', 'Perilaku tidak sopan', 'gagaga', '2025-07-14 00:00:00', 'jajjaja', 'assets/pengaduan/kWjRg8HMxZO25ujiJA9CYGtXxSNa6UBTQHBYzdTv.jpg', '0', '2025-07-14 08:08:29', '2025-07-14 08:08:29', NULL, 'wawawawa', 'xaxaxaax', 'Dosen');
 
 -- --------------------------------------------------------
 
@@ -14638,7 +14660,8 @@ CREATE TABLE `petugas` (
 
 INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `username`, `password`, `telp`, `roles`, `created_at`, `updated_at`) VALUES
 (1, 'Administrator', 'admin', '$2y$10$/iGk2Q1bwRNqPnfQEJDt0.IcbEN7Kth6391V6bF73l7mPYBav.huG', '082117564354', 'admin', '2024-01-05 07:13:20', '2024-01-05 07:13:20'),
-(2, 'Petugas', 'petugas', '$2y$10$p59pboXjtVK2MTv16BctfeRgdbvh.K6ibTFjpgRd.nqNNgIDiChDu', '0872215426712', 'petugas', '2024-03-06 07:33:36', '2024-03-06 07:33:36');
+(2, 'Petugas', 'petugas', '$2y$10$p59pboXjtVK2MTv16BctfeRgdbvh.K6ibTFjpgRd.nqNNgIDiChDu', '0872215426712', 'petugas', '2024-03-06 07:33:36', '2024-03-06 07:33:36'),
+(3, 'admin 2', 'admin2', '$2y$10$/v4/HSe7x3qcNChwRq84g.H5YJgI5D9CSf4hbEnxhH.6amSp2SbpK', '123456', 'admin', '2025-06-29 10:38:42', '2025-06-29 10:38:42');
 
 -- --------------------------------------------------------
 
@@ -15792,7 +15815,9 @@ CREATE TABLE `tanggapan` (
 --
 
 INSERT INTO `tanggapan` (`id_tanggapan`, `id_pengaduan`, `tgl_tanggapan`, `tanggapan`, `id_petugas`, `created_at`, `updated_at`) VALUES
-(1, 1, '2024-03-06 00:00:00', 'Siap Laksanakan', 1, '2024-01-05 08:36:13', '2024-03-06 07:29:44');
+(1, 1, '2024-03-06 00:00:00', 'Siap Laksanakan', 1, '2024-01-05 08:36:13', '2024-03-06 07:29:44'),
+(2, 10, '2025-07-14 00:00:00', '', 1, '2025-07-13 21:14:46', '2025-07-13 21:14:46'),
+(3, 2, '2025-07-14 00:00:00', '', 1, '2025-07-14 00:02:00', '2025-07-14 00:02:00');
 
 -- --------------------------------------------------------
 
@@ -177112,7 +177137,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `pengaduan`
 --
 ALTER TABLE `pengaduan`
-  MODIFY `id_pengaduan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pengaduan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -177124,13 +177149,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_petugas` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanggapan`
 --
 ALTER TABLE `tanggapan`
-  MODIFY `id_tanggapan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tanggapan` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
