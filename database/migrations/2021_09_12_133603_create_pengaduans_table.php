@@ -17,8 +17,9 @@
             $table->id('id_pengaduan');
             $table->string('nik'); // relasi ke masyarakat
             $table->string('nama_pelapor');
+            $table->enum('status_civitas' ,['Dosen', 'Tendik']);
             $table->string('nama_pelanggar');
-            $table->enum('kategori_pelanggar', ['Dosen', 'Tendik']);
+            // $table->enum('kategori_pelanggaran');
             $table->text('isi_laporan');
             $table->date('tgl_kejadian');
             $table->string('lokasi_kejadian');

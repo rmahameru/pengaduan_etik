@@ -10,7 +10,7 @@ use App\Models\Tanggapan;
 class PengaduanController extends Controller
 {
     public function index($status) {
-        $pengaduan = Pengaduan::where('status', $status)->orderBy('tgl_pengaduan', 'desc')->get();
+        $pengaduan = Pengaduan::where('status', $status)->orderBy('created_at', 'desc')->get();
         // dd($satus);
         
         return view('pages.admin.pengaduan.index', compact('pengaduan', 'status'));

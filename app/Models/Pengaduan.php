@@ -14,14 +14,17 @@ class Pengaduan extends Model
     protected $primaryKey = 'id_pengaduan';
 
     protected $fillable = [
-        'tgl_pengaduan',
-        'nik',
-        'judul_laporan',
-        'isi_laporan',
-        'tgl_kejadian',
-        'lokasi_kejadian',
-        'foto',
-        'status',
+        // 'tgl_pengaduan',
+    'nik',
+    'nama_pelapor' ,
+    'status_civitas',
+    'nama_pelanggar',
+    'kategori_pelanggaran' ,
+    'isi_laporan',
+    'tgl_kejadian',
+    'lokasi_kejadian',
+    'foto',
+    'status',
     ];
 
   public function masyarakat()

@@ -60,7 +60,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group mb-3">
+            {{-- <div class="form-group mb-3">
                 <label for="kategori_pelanggaran" class="form-label">Kategori Pelanggaran</label>
                 <select name="kategori_pelanggaran" id="kategori_pelanggaran" class="form-control @error('kategori_pelanggaran') is-invalid @enderror" required>
                     <option value="" disabled {{ old('kategori_pelanggaran') ? '' : 'selected' }}>-- Pilih Kategori --</option>
@@ -74,7 +74,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="form-group mb-3">
                 <label for="isi_laporan" class="form-label">Isi Laporan</label>
@@ -131,41 +131,6 @@
 @endsection
 
 @push('addon-script')
-    <!-- @if (!auth('masyarakat')->check())
-        <script>
-            Swal.fire({
-                title: 'Peringatan!',
-                text: "Anda harus login terlebih dahulu!",
-                icon: 'warning',
-                confirmButtonColor: '#28B7B5',
-                confirmButtonText: 'Masuk',
-                allowOutsideClick: false
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '{{ route('user.masuk') }}';
-                }else{
-                    window.location.href = '{{ route('user.masuk') }}';
-                }
-                });
-        </script>
-    @elseif(auth('masyarakat')->user()->email_verified_at == null && auth('masyarakat')->user()->telp_verified_at == null)
-        <script>
-            Swal.fire({
-                title: 'Peringatan!',
-                text: "Akun belum diverifikasi!",
-                icon: 'warning',
-                confirmButtonColor: '#28B7B5',
-                confirmButtonText: 'Ok',
-                allowOutsideClick: false
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '{{ route('user.masuk') }}';
-                }else{
-                    window.location.href = '{{ route('user.masuk') }}';
-                }
-                });
-        </script>
-    @endif -->
 
     @if (session()->has('pengaduan'))
         <script>

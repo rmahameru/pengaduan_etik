@@ -162,7 +162,7 @@ class UserController extends Controller
         }
 
         // Konversi nilai dari form ke format yang cocok untuk database
-        // $jenis_kelamin_singkat = $data['jenis_kelamin'] === 'Laki-laki' ? 'L' : 'P';
+        $jenis_kelamin_singkat = $data['jenis_kelamin'] === 'Laki-laki' ? 'L' : 'P';
 
 
         Masyarakat::create([
@@ -171,7 +171,7 @@ class UserController extends Controller
             'username' => strtolower($data['username']),
             'email' => $data['email'],
             'telp' => $data['telp'],
-            'jenis_kelamin' => $data['jenis_kelamin'],
+            'jenis_kelamin' => $jenis_kelamin_singkat,
             'password' => Hash::make($data['password']),
         ]);
 
@@ -194,8 +194,8 @@ class UserController extends Controller
 {
     if (!Auth::guard('masyarakat')->check()) {
         return redirect()->back()->with(['pengaduan' => 'Login dibutuhkan!', 'type' => 'error']);
-    } elseif (Auth::guard('masyarakat')->user()->email_verified_at == null && Auth::guard('masyarakat')->user()->telp_verified_at == null) {
-        return redirect()->back()->with(['pengaduan' => 'Akun belum diverifikasi!', 'type' => 'error']);
+    // } elseif (Auth::guard('masyarakat')->user()->email_verified_at == null && Auth::guard('masyarakat')->user()->telp_verified_at == null) {
+    //     return redirect()->back()->with(['pengaduan' => 'Akun belum diverifikasi!', 'type' => 'error']);
     }
 
     $data = $request->all();
@@ -204,7 +204,7 @@ class UserController extends Controller
         'nama_pelapor' => ['required', 'string'],
         'status_civitas' => ['required', 'string'],
         'nama_pelanggar' => ['required', 'string'],
-        'kategori_pelanggaran' => ['required', 'string'],
+        // 'kategori_pelanggaran' => ['required', 'string'],
         'isi_laporan' => ['required'],
         'tgl_kejadian' => ['required', 'date'],
         'lokasi_kejadian' => ['required'],
@@ -222,17 +222,19 @@ class UserController extends Controller
     date_default_timezone_set('Asia/Bangkok');
 
     $pengaduan = Pengaduan::create([
-        'nama_pelapor' => $data['nama_pelapor'],
-        'nama_pelanggar' => $data['nama_pelanggar'],
-        'tgl_pengaduan' => date('Y-m-d H:i:s'),
-        'nik' => Auth::guard('masyarakat')->user()->nik,
-        'judul_laporan' => $data['kategori_pelanggaran'], // e.g. use kategori as judul
-        'isi_laporan' => $data['isi_laporan'],
-        'tgl_kejadian' => $data['tgl_kejadian'],
-        'lokasi_kejadian' => $data['lokasi_kejadian'],
-        'foto' => $data['foto'] ?? 'assets/pengaduan/tambakmekar.png',
-        'status' => '0',
-    ]);
+            // 'tgl_pengaduan' => date('Y-m-d H:i:s'),
+            'nik' => Auth::guard('masyarakat')->user()->nik,
+            'nama_pelapor' => $data['nama_pelapor'],
+            'status_civitas' => $data['status_civitas'],
+            'nama_pelanggar' => $data['nama_pelanggar'],
+            // 'kategori_pelanggaran' => $data['kategori_pelanggaran'],
+            'isi_laporan' => $data['isi_laporan'],
+            'tgl_kejadian' => $data['tgl_kejadian'],
+            'lokasi_kejadian' => $data['lokasi_kejadian'],
+            'foto' => $data['foto'] ?? null,
+            
+        
+]);
 
     if ($pengaduan) {
         return redirect()->back()->with(['pengaduan' => 'Berhasil terkirim!', 'type' => 'success']);
@@ -251,12 +253,12 @@ class UserController extends Controller
 
         if ($who == 'saya') {
 
-            $pengaduan = Pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)->orderBy('tgl_pengaduan', 'desc')->get();
+            $pengaduan = Pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)->orderBy('created_at', 'desc')->get();
 
             return view('pages.user.laporan', ['pengaduan' => $pengaduan, 'hitung' => $hitung, 'who' => $who]);
         } else {
 
-            $pengaduan = Pengaduan::where('status', '!=', '0')->orderBy('tgl_pengaduan', 'desc')->get();
+            $pengaduan = Pengaduan::where('status', '!=', '0')->orderBy('created_at', 'desc')->get();
 
             return view('pages.user.laporan', ['pengaduan' => $pengaduan, 'hitung' => $hitung, 'who' => $who]);
         }
@@ -265,7 +267,7 @@ class UserController extends Controller
     public function detailPengaduan($id_pengaduan)
     {
         $pengaduan = Pengaduan::where('id_pengaduan', $id_pengaduan)->first();
-
+// $pengaduan = Pengaduan::with('masyarakat')->find($id_pengaduan);
         return view('pages.user.detail', ['pengaduan' => $pengaduan]);
     }
 
@@ -283,7 +285,7 @@ class UserController extends Controller
          $validate = Validator::make($data, [
             'nama_pelapor' => ['required', 'string'],
             'nama_pelanggar' => ['required', 'string'],
-            'kategori_pelanggar' => ['required', 'in:Dosen,Tendik'],
+            'kategori_pelanggaran' => ['required', 'in:Dosen,Tendik'],
             'isi_laporan' => ['required'],
             'tgl_kejadian' => ['required', 'date'],
             'lokasi_kejadian' => ['required'],
@@ -301,7 +303,7 @@ class UserController extends Controller
         $pengaduan = Pengaduan::where('id_pengaduan', $id_pengaduan)->first();
 
         $pengaduan->update([
-             'tgl_pengaduan' => date('Y-m-d H:i:s'),
+            'tgl_pengaduan' => date('Y-m-d H:i:s'),
             'nik' => Auth::guard('masyarakat')->user()->nik,
             'nama_pelapor' => $data['nama_pelapor'],
             'nama_pelanggar' => $data['nama_pelanggar'],
