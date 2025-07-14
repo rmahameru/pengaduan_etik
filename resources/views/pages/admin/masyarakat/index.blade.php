@@ -12,11 +12,11 @@
           <div class="header-body">
             <div class="row align-items-center py-4">
               <div class="col-lg-6 col-7">
-                <h6 class="h2 text-white d-inline-block mb-0">Masyarakat</h6>
+                <h6 class="h2 text-white d-inline-block mb-0">Pengguna</h6>
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                   {{-- <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                     <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Masyarakat</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pengguna</a></li>
                   </ol> --}}
                 </nav>
               </div>
@@ -31,7 +31,7 @@
             <div class="card">
               <!-- Card header -->
               <div class="card-header border-0 d-flex justify-content-between">
-                <h3 class="mb-0">Data Masyarakat</h3>
+                <h3 class="mb-0">Data Pengguna</h3>
               </div>
               <!-- Light table -->
               <div class="table-responsive">
@@ -120,7 +120,7 @@
         let nik = $(this).data('nik');
         Swal.fire({
                 title: 'Peringatan!',
-                text: "Apakah Anda yakin akan menghapus masyarakat?",
+                text: "Apakah Anda yakin akan menghapus pengguna?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#28B7B5',
@@ -138,7 +138,7 @@
                         if (response == 'success') {
                             Swal.fire({
                                 title: 'Pemberitahuan!',
-                                text: "Masyarakat berhasil dihapus!",
+                                text: "Pengguna berhasil dihapus!",
                                 icon: 'success',
                                 confirmButtonColor: '#28B7B5',
                                 confirmButtonText: 'OK',
@@ -154,7 +154,7 @@
                     error: function (data) {
                         Swal.fire({
                             title: 'Pemberitahuan!',
-                            text: "Masyarakat gagal dihapus!",
+                            text: "Pengguna gagal dihapus!",
                             icon: 'error',
                             confirmButtonColor: '#28B7B5',
                             confirmButtonText: 'OK',
@@ -164,7 +164,7 @@
             } else {
                 Swal.fire({
                     title: 'Pemberitahuan!',
-                    text: "Masyarakat gagal dihapus!",
+                    text: "Pengguna gagal dihapus!",
                     icon: 'error',
                     confirmButtonColor: '#28B7B5',
                     confirmButtonText: 'OK',

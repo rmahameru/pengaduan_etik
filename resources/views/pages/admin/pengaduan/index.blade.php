@@ -47,7 +47,10 @@
                       <th scope="col" class="sort" data-sort="nama_pelapor">Nama Pelapor</th>
                       <th scope="col" class="sort" data-sort="nama_pelanggar">Nama Pelanggar</th>
                       
-                      <th scope="col" class="sort" data-sort="isi">Isi Laporan</th>
+                      <th scope="col" class="sort" data-sort="isi">Status Pelanggar</th>
+                      <th scope="col" class="sort" data-sort="isi">Kategori Pelanggaran</th>
+                      <!-- <th scope="col" class="sort" data-sort="isi">Isi Laporan</th> -->
+                      <th scope="col" class="sort" data-sort="isi">Lokasi Kejadian</th>
                       <th scope="col" class="sort" data-sort="status">Status</th>
                       <th scope="col" class="sort" data-sort="action">Aksi</th>
                       <th scope="col" class="sort" data-sort="action">Bukti</th>
@@ -64,13 +67,23 @@
                             <span class="text-sm">{{ \Carbon\Carbon::parse($v->tgl_pengaduan)->format('d-m-Y') }}</span>
                         </td>
                         <td>
-                            <span class="text-sm">{{ optional($v->user)->nama_pelapor ?? '-' }}</span>
+                            <span class="text-sm">{{ $v->nama_pelapor ?? '-' }}</span>
                         </td>
                         <td>
-                            <span class="text-sm">{{ optional($v->user)->nama_pelanggar ?? '-' }}</span>
+                            <span class="text-sm">{{ $v->nama_pelanggar ?? '-' }}</span>
                         </td>
                         <td>
+                            <span class="text-sm">{{ $v->status_civitas ?? '-' }}</span>
+                        </td>
+                        <td>
+                            <span class="text-sm">{{ $v->kategori_pelanggaran ?? '-' }}</span>
+                        </td>
+                        
+                        <!-- <td>
                             <span class="text-sm">{{ Str::limit($v->isi_laporan, 30)}}</span>
+                        </td> -->
+                        <td>
+                            <span class="text-sm">{{ $v->lokasi_kejadian ?? '-' }}</span>
                         </td>
                         <td>
                           <div class="d-flex align-items-center">

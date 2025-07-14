@@ -41,11 +41,7 @@
                             <td>:</td>
                             <td>{{ $pengaduan->nik }}</td>
                         </tr>
-                        <!-- <tr>
-                            <th>Nama</th>
-                            <td>:</td>
-                            <td>{{ $pengaduan->user->name }}</td>
-                        </tr> -->
+                        
                         <tr>
                             <th>Nama Pelapor</th>
                             <td>:</td>
@@ -95,10 +91,18 @@
                             <td>{{ $pengaduan->lokasi_kejadian }}</td>
                         </tr>
                         <tr>
-                          <th>Foto Kejadian</th>
-                          <td>:</td>
-                          <td><img src="{{ Storage::url($pengaduan->foto) }} " class="card-img"></td>
+                            <th>Foto Kejadian</th>
+                            <td>:</td>
+                            <td>
+                                @if ($pengaduan->foto)
+                                    <img src="{{ Storage::url($pengaduan->foto) }}" class="card-img" style="max-width: 300px;">
+                                @else
+                                    <span class="text-muted">Tidak ada foto</span>
+                                @endif
+                            </td>
+                            
                         </tr>
+
                         {{-- <tr>
                             <th>Hapus Pengaduan</th>
                             <td>:</td>

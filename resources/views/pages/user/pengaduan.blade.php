@@ -60,7 +60,7 @@
                     </div>
                 @enderror
             </div>
-            {{-- <div class="form-group mb-3">
+            <div class="form-group mb-3">
                 <label for="kategori_pelanggaran" class="form-label">Kategori Pelanggaran</label>
                 <select name="kategori_pelanggaran" id="kategori_pelanggaran" class="form-control @error('kategori_pelanggaran') is-invalid @enderror" required>
                     <option value="" disabled {{ old('kategori_pelanggaran') ? '' : 'selected' }}>-- Pilih Kategori --</option>
@@ -74,7 +74,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-            </div> --}}
+            </div> 
 
             <div class="form-group mb-3">
                 <label for="isi_laporan" class="form-label">Isi Laporan</label>

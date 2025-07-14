@@ -53,7 +53,7 @@
     <div class="container d-flex align-items-center">
 
     <h1 class="logo me-auto d-flex align-items-center" style="justify-content: flex-start;">
-      <img src="{{ asset('assets/img/Logo Poltekkes Kemenkes Surabaya.png') }}" alt="Logo" style="height: 40px; margin-right: 10px;">
+      <img src="{{ asset('assets/img/3 logo.png') }}" alt="Logo" style="height: 40px; margin-right: 10px;">
       <a href="/" color: #000080; text-decoration: none;">POLKESBAYA BERETIKA</a>
     </h1>
     
