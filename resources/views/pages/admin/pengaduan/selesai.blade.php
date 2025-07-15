@@ -79,14 +79,15 @@
                                         </td>
 
                                         <!-- <td>
-                                    <span class="text-sm">{{ Str::limit($v->isi_laporan, 30) }}</span>
-                                </td> -->
+                                <span class="text-sm">{{ Str::limit($v->isi_laporan, 30) }}</span>
+                            </td> -->
                                         <td>
                                             <span class="text-sm">{{ $v->lokasi_kejadian ?? '-' }}</span>
                                         </td>
                                         <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="text-sm badge badge-danger">Pending</span>
+                                            <div class="d-flex align-items-center">                                            
+                                                    <span class="text-sm badge badge-success">Selesai</span>
+                                                @endif
                                             </div>
                                         </td>
 

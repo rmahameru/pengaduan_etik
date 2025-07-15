@@ -41,7 +41,7 @@
                 <select name="status_civitas" id="status_civitas" class="form-control @error('status_civitas') is-invalid @enderror" required>
                     <option value="" disabled {{ old('status_civitas') ? '' : 'selected' }}>-- Pilih Status --</option>
                     <option value="Dosen" {{ old('status_civitas') == 'Dosen' ? 'selected' : '' }}>Dosen</option>
-                    <option value="Tenaga Kependidikan" {{ old('status_civitas') == 'Tenaga Kependidikan' ? 'selected' : '' }}>Tenaga Kependidikan</option>
+                    <option value="Tendik" {{ old('status_civitas') == 'Tenaga Kependidikan' ? 'selected' : '' }}>Tenaga Kependidikan</option>
                     
                 </select>
                 @error('status_civitas')

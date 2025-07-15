@@ -42,13 +42,11 @@
                                 <tr style="text-align: center;">
                                     <th scope="col" class="sort" data-sort="no">No</th>
                                     <th scope="col" class="sort" data-sort="tanggal">Tanggal</th>
-
                                     <th scope="col" class="sort" data-sort="nama_pelapor">Nama Pelapor</th>
                                     <th scope="col" class="sort" data-sort="nama_pelanggar">Nama Pelanggar</th>
-
                                     <th scope="col" class="sort" data-sort="isi">Status Pelanggar</th>
                                     <th scope="col" class="sort" data-sort="isi">Kategori Pelanggaran</th>
-                                    <!-- <th scope="col" class="sort" data-sort="isi">Isi Laporan</th> -->
+                                    <th scope="col" class="sort" data-sort="isi">Isi Laporan</th>
                                     <th scope="col" class="sort" data-sort="isi">Lokasi Kejadian</th>
                                     <th scope="col" class="sort" data-sort="status">Status</th>
                                     <th scope="col" class="sort" data-sort="action">Aksi</th>
@@ -77,29 +75,25 @@
                                         <td>
                                             <span class="text-sm">{{ $v->kategori_pelanggaran ?? '-' }}</span>
                                         </td>
-
-                                        <!-- <td>
-                                    <span class="text-sm">{{ Str::limit($v->isi_laporan, 30) }}</span>
-                                </td> -->
+                                        <td>
+                                            <span class="text-sm">{{ Str::limit($v->isi_laporan, 30) }}</span>
+                                        </td>
                                         <td>
                                             <span class="text-sm">{{ $v->lokasi_kejadian ?? '-' }}</span>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span class="text-sm badge badge-danger">Pending</span>
+                                                <span style="background-color: rgb(255, 255, 108); color: black;" class="text-sm badge">Proses</span>
                                             </div>
                                         </td>
-
                                         <td>
                                             <a href="#" data-id_pengaduan="{{ $v->id_pengaduan }}"
-                                                class="btn btn-primary pengaduan">Verifikasi</a>
+                                                class="btn btn-primary pengaduanProses">Selesai</a>
                                             <a href="#" data-id_pengaduan="{{ $v->id_pengaduan }}"
                                                 class="btn btn-danger pengaduanDelete">Hapus</a>
                                         </td>
-
                                         <td><a href="{{ route('pengaduan.show', $v->id_pengaduan) }}"
                                                 class="btn btn-info">Lihat</a></td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -152,48 +146,46 @@
             console.log(id);
         });
 
-        $(document).on('click', '.pengaduan', function(e) {
+        $(document).on('click', '.pengaduanProses', function(e) {
             e.preventDefault();
             let id_pengaduan = $(this).data('id_pengaduan');
+
             Swal.fire({
                 title: 'Peringatan!',
-                text: "Apakah Anda yakin akan memverifikasi pengaduan?",
+                text: "Apakah Anda yakin ingin menyelesaikan pengaduan ini?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#28B7B5',
-                confirmButtonText: 'OK',
+                confirmButtonText: 'Ya, Selesaikan!',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: '{{ route('tanggapan') }}',
+                        url: '{{ route('pengaduan.proses') }}',
                         data: {
                             "_token": "{{ csrf_token() }}",
                             "id_pengaduan": id_pengaduan,
-                            "status": "proses",
-                            "tanggapan": ''
+                            "status": "selesai", // ✅ ubah status jadi 'selesai'
+                            // "tanggapan": '' atau isi sesuai inputan
                         },
                         success: function(response) {
-                            if (response == 'success') {
+                            if (response === 'success') {
                                 Swal.fire({
-                                    title: 'Pemberitahuan!',
-                                    text: "Pengaduan berhasil diverifikasi!",
+                                    title: 'Berhasil!',
+                                    text: "Pengaduan telah diselesaikan!",
                                     icon: 'success',
                                     confirmButtonColor: '#28B7B5',
                                     confirmButtonText: 'OK',
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        location.reload();
-                                    } else {
-                                        location.reload();
-                                    }
+                                }).then(() => {
+                                    location.reload();
                                 });
                             }
                         },
                         error: function(data) {
                             Swal.fire({
-                                title: 'Pemberitahuan!',
-                                text: "Pengaduan gagal diverifikasi!",
+                                title: 'Gagal!',
+                                text: "Pengaduan tidak dapat diproses!",
                                 icon: 'error',
                                 confirmButtonColor: '#28B7B5',
                                 confirmButtonText: 'OK',
@@ -202,9 +194,9 @@
                     });
                 } else {
                     Swal.fire({
-                        title: 'Pemberitahuan!',
-                        text: "Pengaduan gagal diverifikasi!",
-                        icon: 'error',
+                        title: 'Dibatalkan!',
+                        text: "Pengaduan tidak diselesaikan.",
+                        icon: 'info',
                         confirmButtonColor: '#28B7B5',
                         confirmButtonText: 'OK',
                     });

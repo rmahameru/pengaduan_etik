@@ -10,13 +10,38 @@ use App\Models\Masyarakat;
 class PengaduanController extends Controller
 {
     public function index($status) {
-        $masyarakat = Masyarakat::all();
-        $pengaduan = Pengaduan::with('masyarakat')->orderBy('created_at', 'desc')->get();
-        // $pengaduan = Pengaduan::where('status', $status)->orderBy('created_at', 'desc')->get();
-        // // dd($satus);
+
+    // Ubah kode status '0' menjadi nama status sesuai database
+    $statusValue = ($status === '0') ? 'menunggu_verifikasi' : $status;
+
+    // Ambil data pengaduan dengan relasi ke masyarakat dan filter berdasarkan status
+    $masyarakat = Masyarakat::all();
+    $pengaduan = Pengaduan::with('masyarakat')
+                    ->where('status', $statusValue)
+                    ->get();
         
-        return view('pages.admin.pengaduan.index', compact('pengaduan', 'masyarakat'));
+        return view('pages.admin.pengaduan.index', compact('pengaduan', 'masyarakat','status'));
     }
+
+     public function proses()
+{
+    $masyarakat = Masyarakat::all();
+    $pengaduan = Pengaduan::with('masyarakat')
+                    ->where('status', 'proses')
+                    ->get();
+
+    return view('pages.admin.pengaduan.proses', compact('pengaduan','masyarakat'));
+}
+
+    public function selesai()
+    {
+    $masyarakat = Masyarakat::all();
+    $pengaduan = Pengaduan::with('masyarakat')
+                    ->where('status', 'selesai')
+                    ->get();
+        
+        return view('pages.admin.pengaduan.selesai', compact('pengaduan', 'masyarakat'));
+    }   
     
     public function show($id_pengaduan) {
         $pengaduan = Pengaduan::where('id_pengaduan', $id_pengaduan)->first();
@@ -45,4 +70,8 @@ class PengaduanController extends Controller
 
         return redirect()->route('pengaduan.index');
     }
+
+
+  
+
 }

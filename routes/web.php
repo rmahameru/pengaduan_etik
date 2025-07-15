@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
 
-// use App\Http\Controllers\Admin\PengaduanController;
+
 
 // Route::post('/pengaduan', [PengaduanController::class, 'store'])
 //     ->name('pengaduan.store');
@@ -60,9 +60,16 @@ Route::prefix('admin')->group( function() {
 
        Route::resource('/petugas', \App\Http\Controllers\Admin\PetugasController::class);
        Route::resource('/masyarakat', \App\Http\Controllers\Admin\MasyarakatController::class);
+     
+       Route::get('pengaduan/{status}', [\App\Http\Controllers\Admin\PengaduanController::class, 'index'])->name('pengaduan.index');
+        Route::get('admin/pengaduan/proses', [\App\Http\Controllers\Admin\PengaduanController::class, 'proses'])->name('pengaduan.proses');
+        Route::get('pengaduan/selesai', [\App\Http\Controllers\Admin\PengaduanController::class, 'selesai'])->name('pengaduan.selesai');
+        Route::get('pengaduan/show/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'show'])->name('pengaduan.show');
+        Route::delete('pengaduan/delete/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'destroy'])->name('pengaduan.delete');
 
        Route::get('/laporan', [\App\Http\Controllers\Admin\LaporanController::class, 'index'])->name('laporan.index');
-       Route::post('/laporan-get', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan'])->name('laporan.get');
+       
+       Route::post('/laporan/cetak', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan'])->name('laporan.get');
        Route::post('/laporan/export', [\App\Http\Controllers\Admin\LaporanController::class, 'export'])->name('laporan.export');
     });
 
@@ -71,9 +78,9 @@ Route::prefix('admin')->group( function() {
         Route::get('/logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('admin.logout');
         //  Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
         // Pengaduan
-        Route::get('pengaduan/{status}', [\App\Http\Controllers\Admin\PengaduanController::class, 'index'])->name('pengaduan.index');
-        Route::get('pengaduan/show/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'show'])->name('pengaduan.show');
-        Route::delete('pengaduan/delete/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'destroy'])->name('pengaduan.delete');
+        // Route::get('pengaduan/{status}', [\App\Http\Controllers\Admin\PengaduanController::class, 'index'])->name('pengaduan.index');
+        // Route::get('pengaduan/show/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'show'])->name('pengaduan.show');
+        // Route::delete('pengaduan/delete/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'destroy'])->name('pengaduan.delete');
 
         // Tanggapan
         Route::post('tanggapan', [\App\Http\Controllers\Admin\TanggapanController::class, 'response'])->name('tanggapan');
