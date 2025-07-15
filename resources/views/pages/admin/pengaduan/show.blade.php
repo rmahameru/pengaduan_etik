@@ -127,7 +127,7 @@
                     @csrf
                     <input type="hidden" name="id_pengaduan" value="{{ $pengaduan->id_pengaduan }}">
                   <!-- Tanggapan -->
-                  <div class="">
+                  {{-- <div class="">
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select name="status" class="form-control" id="status">
@@ -150,7 +150,7 @@
                       <label class="form-control-label">Tanggapan</label>
                       <textarea rows="4" class="form-control" name="tanggapan" id="tanggapan" placeholder="Ketik tanggapan">{{ $tanggapan->tanggapan ?? '' }}</textarea>
                     </div>
-                  </div>
+                  </div> --}}
 
                   <button type="submit" class="btn btn-primary">Kirim</button>
                 </form>

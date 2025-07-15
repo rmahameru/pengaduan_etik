@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
-use App\Models\Tanggapan;
+use App\Models\Masyarakat;
 
 class PengaduanController extends Controller
 {
     public function index($status) {
-        $pengaduan = Pengaduan::where('status', $status)->orderBy('created_at', 'desc')->get();
-        // dd($satus);
+        $masyarakat = Masyarakat::all();
+        $pengaduan = Pengaduan::with('masyarakat')->orderBy('created_at', 'desc')->get();
+        // $pengaduan = Pengaduan::where('status', $status)->orderBy('created_at', 'desc')->get();
+        // // dd($satus);
         
-        return view('pages.admin.pengaduan.index', compact('pengaduan', 'status'));
+        return view('pages.admin.pengaduan.index', compact('pengaduan', 'masyarakat'));
     }
     
     public function show($id_pengaduan) {

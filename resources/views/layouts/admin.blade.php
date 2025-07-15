@@ -11,7 +11,8 @@
   @stack('prepend-style')
   @include('includes.admin.style')
   @stack('addon-style')
-
+  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 </head>
 
 <body>
