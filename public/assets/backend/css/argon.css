@@ -3351,8 +3351,8 @@ fieldset:disabled a.btn
 .btn-primary
 {
     color: #fff;
-    border-color: #5e72e4;
-    background-color: #5e72e4;
+    border-color: #1977cc;
+    background-color: #1977cc;
     box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
 .btn-primary:hover
@@ -8790,7 +8790,7 @@ a.close.disabled
 
 .bg-primary
 {
-    background-color: #5e72e4 !important;
+    background-color: #1977cc !important;
 }
 
 a.bg-primary:hover,
@@ -17770,7 +17770,7 @@ button.bg-darker:focus
 
 .text-primary
 {
-    color: #5e72e4 !important;
+    color: #1977cc !important;
 }
 
 a.text-primary:hover,
@@ -21153,7 +21153,7 @@ textarea[resize='horizontal']
     width: 100%;
 
     border: 0;
-    background-color: transparent;
+    background-color:#f1f1f1;
     box-shadow: none;
 }
 .navbar-horizontal.navbar-transparent .navbar-brand
@@ -24174,12 +24174,12 @@ button.bg-lighter:focus
 
 .bg-gradient-primary
 {
-    background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%) !important;
+ background-color: #0A9396 !important;
 }
 
 .bg-gradient-secondary
 {
-    background: linear-gradient(87deg, #f7fafc 0, #f7f8fc 100%) !important;
+    background: linear-gradient(87deg, #dbe2ef 0%, #3f72af 100%) !important;
 }
 
 .bg-gradient-success

@@ -7,7 +7,7 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container">
-      <h1 style="color: #191970;">PENGADUAN ETIK</h1>
+      <h1 style="color: #1977cc;">PENGADUAN ETIK</h1>
       <a href="{{ route('pengaduan')}}" class="btn-get-started scrollto">Buat Pengaduan</a>
     </div>
   </section><!-- End Hero -->

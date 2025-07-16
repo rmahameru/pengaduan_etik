@@ -11,94 +11,29 @@
   @stack('prepend-style')
   @include('includes.admin.style')
   @stack('addon-style')
-</head>
+</head>  
 
-<body class="bg-default">
-  <!-- Navbar -->
-  <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        Pengaduan Etik
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
-        <div class="navbar-collapse-header">
-          <div class="row">
-            <div class="col-6 collapse-brand">
-              <a href="/"> Pengaduan Etik</a>
-            </div>
-            <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a href="/" class="nav-link">
-              <span class="nav-link-inner--text">Home</span>
-            </a>
-          </li>
-          {{-- <li class="nav-item">
-            <a href="{{ url('tentang')}}" class="nav-link">
-              <span class="nav-link-inner--text">Tentang</span>
-            </a>
-          </li>
-        </ul>
-        <hr class="d-lg-none" /> --}}
-
-      </div>
-    </div>
-  </nav>
+<body class="bg-primary">
   <!-- Main content -->
   <div class="main-content">
-    <!-- Header -->
-    <div class="header bg-gradient-primary d-flex justify-content-center align-items-center" style="min-height: 70vh;">
-  <div class="container">
-    <div class="header-body text-center">
-      <div class="row justify-content-center">
-        <div class="col-xl-5 col-lg-6 col-md-8 px-5 mx-auto text-center">
-          <img src="{{ asset('assets/img/3 logo.png') }}" alt="Logo"
-               class="mb-3 d-block mx-auto"
-               style="max-height: 300px; transform: translateX(-100px);">
-          <h1 class="text-white">Login</h1>
-          <p class="text-lead text-white">
-            Silahkan login menggunakan akun yang sudah didaftarkan.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-      <div class="separator separator-bottom separator-skew zindex-100">
-        <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-        </svg>
-      </div>
-    </div>
     <!-- Page content -->
-    <div class="container mt--8 pb-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-7">
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+  <div class="row w-100">
+    <div class="col-lg-5 col-md-7 mx-auto">
           <div class="card bg-secondary border-0 mb-0">
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form" action="{{ route('user.login')}}" method="POST">
-                  @csrf
+             <h2 class="text-center mb-4 text-primary">LOGIN</h2>
+              <form role="form" action="{{ route('user.login') }}" method="POST">
+                @csrf
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input type="text" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="Email atau Username">
+                    <input type="text" value="{{ old('username') }}" name="username" id="username"
+                      class="form-control @error('username') is-invalid @enderror" placeholder="Email atau Username">
                     @error('username')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
                 </div>
@@ -107,17 +42,16 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password" type="password">
+                    <input type="password" name="password" id="password"
+                      class="form-control @error('password') is-invalid @enderror" placeholder="Password">
                     @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
-                  <label class="custom-control-label" for=" customCheckLogin">
+                  <input class="custom-control-input" id="customCheckLogin" type="checkbox">
+                  <label class="custom-control-label" for="customCheckLogin">
                     <span class="text-muted">Remember me</span>
                   </label>
                 </div>
@@ -128,23 +62,22 @@
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-6">
-              {{-- <a href="#" class="text-light"><small>Lupa password?</small></a> --}}
-            </div>
+            <div class="col-6"></div>
             <div class="col-6 text-right">
-              <a href="{{ url('register')}}" class="text-light"><small>Buat akun baru</small></a>
+              <a href="{{ url('register') }}" class="text-light"><small>Buat akun baru</small></a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</body>
   <!-- Footer -->
   <footer class="py-5" id="footer-main">
     <div class="container">
 
-          <div class="copyright text-center text-muted">
-            &copy; Copyright <strong><span><a href="" target="_blank">IT</a></span></strong>. Poltekkes Kemenkes Surabaya
+          <div class="copyright text-center text-white">
+            &copy; Copyright <strong><span>IT</a></span></strong>. Poltekkes Kemenkes Surabaya
           </div>
     </div>
   </footer>

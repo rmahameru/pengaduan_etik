@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Pengaduan')
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @push('addon-style')
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"> -->
@@ -9,6 +10,7 @@
 @endpush
 @section('content')
     <!-- Header -->
+
     <div class="header bg-primary pb-6">
         <div class="container-fluid">
             <div class="header-body">
@@ -27,6 +29,7 @@
         </div>
     </div>
     <!-- Page content -->
+
     <div class="container-fluid mt--6">
         <div class="row">
             <div class="col">
@@ -83,10 +86,12 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span style="background-color: rgb(255, 255, 108); color: black;" class="text-sm badge">Proses</span>
+                                                <span style="background-color: rgb(255, 255, 111); color: black;"
+                                                    class="text-sm badge">Proses</span>
                                             </div>
                                         </td>
                                         <td>
+
                                             <a href="#" data-id_pengaduan="{{ $v->id_pengaduan }}"
                                                 class="btn btn-primary pengaduanProses">Selesai</a>
                                             <a href="#" data-id_pengaduan="{{ $v->id_pengaduan }}"
@@ -146,46 +151,48 @@
             console.log(id);
         });
 
-        $(document).on('click', '.pengaduanProses', function(e) {
+       $(document).on('click', '.pengaduanProses', function(e) {
             e.preventDefault();
             let id_pengaduan = $(this).data('id_pengaduan');
-
             Swal.fire({
                 title: 'Peringatan!',
-                text: "Apakah Anda yakin ingin menyelesaikan pengaduan ini?",
+                text: "Apakah Anda yakin akan memverifikasi pengaduan?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#28B7B5',
-                confirmButtonText: 'Ya, Selesaikan!',
-                cancelButtonText: 'Batal'
+                confirmButtonText: 'OK',
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: '{{ route('pengaduan.proses') }}',
+                        url: '{{ route('tanggapan') }}',
                         data: {
                             "_token": "{{ csrf_token() }}",
                             "id_pengaduan": id_pengaduan,
-                            "status": "selesai", // ✅ ubah status jadi 'selesai'
-                            // "tanggapan": '' atau isi sesuai inputan
+                            "status": "selesai",
+                            "tanggapan": ''
                         },
                         success: function(response) {
-                            if (response === 'success') {
+                            if (response == 'success') {
                                 Swal.fire({
-                                    title: 'Berhasil!',
-                                    text: "Pengaduan telah diselesaikan!",
+                                    title: 'Pemberitahuan!',
+                                    text: "Pengaduan berhasil diverifikasi!",
                                     icon: 'success',
                                     confirmButtonColor: '#28B7B5',
                                     confirmButtonText: 'OK',
-                                }).then(() => {
-                                    location.reload();
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    } else {
+                                        location.reload();
+                                    }
                                 });
                             }
                         },
                         error: function(data) {
                             Swal.fire({
-                                title: 'Gagal!',
-                                text: "Pengaduan tidak dapat diproses!",
+                                title: 'Pemberitahuan!',
+                                text: "Pengaduan gagal diverifikasi!",
                                 icon: 'error',
                                 confirmButtonColor: '#28B7B5',
                                 confirmButtonText: 'OK',
@@ -194,9 +201,9 @@
                     });
                 } else {
                     Swal.fire({
-                        title: 'Dibatalkan!',
-                        text: "Pengaduan tidak diselesaikan.",
-                        icon: 'info',
+                        title: 'Pemberitahuan!',
+                        text: "Pengaduan gagal diverifikasi!",
+                        icon: 'error',
                         confirmButtonColor: '#28B7B5',
                         confirmButtonText: 'OK',
                     });

@@ -30,7 +30,7 @@ class PengaduanController extends Controller
                     ->where('status', 'proses')
                     ->get();
 
-    return view('pages.admin.pengaduan.proses', compact('pengaduan','masyarakat'));
+    return view('pages.admin.pengaduan.proses', compact('pengaduan','masyarakat'));   
 }
 
     public function selesai()
@@ -69,6 +69,33 @@ class PengaduanController extends Controller
         }
 
         return redirect()->route('pengaduan.index');
+    }
+
+        public function ubahStatus(Request $request)
+    {
+        $pengaduan = Pengaduan::find($request->id_pengaduan);
+
+        if (!$pengaduan) {
+            return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan'], 404);
+        }
+
+        // Validasi status agar urutannya benar
+        $statusSekarang = $pengaduan->status;
+        $statusBaru     = $request->status;
+
+        $alurValid = [
+            'menunggu_verifikasi' => 'proses',
+            'proses' => 'selesai'
+        ];
+
+        // Cek apakah transisi status valid
+        if (isset($alurValid[$statusSekarang]) && $alurValid[$statusSekarang] === $statusBaru) {
+            $pengaduan->status = $statusBaru;
+            $pengaduan->save();
+            return response()->json(['status' => 'success']);
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Transisi status tidak valid'], 400);
     }
 
 

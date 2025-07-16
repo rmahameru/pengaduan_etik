@@ -36,8 +36,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->is('admin/') ? 'active' : '' }}"
-                                    {{-- href="{{ route('pengaduan.proses') }}"> --}}
+                                <a class="nav-link {{ request()->is('pengaduan/proses') ? 'active' : '' }}"
                                     href="{{ route('pengaduan.proses') }}">
                                     <i class="fas fa-sync text-yellow"></i> Sedang Diproses
                                 </a>

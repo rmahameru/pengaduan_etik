@@ -87,13 +87,12 @@
                                         <td>
                                             <div class="d-flex align-items-center">                                            
                                                     <span class="text-sm badge badge-success">Selesai</span>
-                                                @endif
-                                            </div>
+                                         </div>
                                         </td>
 
                                         <td>
-                                            <a href="#" data-id_pengaduan="{{ $v->id_pengaduan }}"
-                                                class="btn btn-primary pengaduan">Verifikasi</a>
+                                            {{-- <a href="#" data-id_pengaduan="{{ $v->id_pengaduan }}"
+                                                class="btn btn-primary pengaduan">Verifikasi</a> --}}
                                             <a href="#" data-id_pengaduan="{{ $v->id_pengaduan }}"
                                                 class="btn btn-danger pengaduanDelete">Hapus</a>
                                         </td>

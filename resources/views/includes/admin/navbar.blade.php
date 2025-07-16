@@ -55,8 +55,8 @@
                          <!--  <a href="/admin/dashboard" class="dropdown-item">
                 <i class="ni ni-single-02"></i>
                 <span>My profile</span>
-              </a> -->
-                         <form method="POST" action="{{ route('admin.logout') }}">
+              </a>-->
+                         <form method="GET" action="{{ route('admin.logout') }}">
                              @csrf
                              <button type="submit" class="dropdown-item" title="Logout" data-toggle="tooltip">
                                  <i class="ni ni-user-run"></i>

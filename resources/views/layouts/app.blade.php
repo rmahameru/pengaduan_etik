@@ -147,7 +147,7 @@
 
       <div class="me-md-auto my-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span><a href="" target="_blank">IT</a></span></strong>. Poltekkes Kemenkes Surabaya 
+          &copy; Copyright <strong><span>IT</a></span></strong>. Poltekkes Kemenkes Surabaya 
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">

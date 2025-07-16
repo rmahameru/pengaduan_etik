@@ -63,7 +63,8 @@ Route::prefix('admin')->group( function() {
      
        Route::get('pengaduan/{status}', [\App\Http\Controllers\Admin\PengaduanController::class, 'index'])->name('pengaduan.index');
         Route::get('admin/pengaduan/proses', [\App\Http\Controllers\Admin\PengaduanController::class, 'proses'])->name('pengaduan.proses');
-        Route::get('pengaduan/selesai', [\App\Http\Controllers\Admin\PengaduanController::class, 'selesai'])->name('pengaduan.selesai');
+        // Route::post('pengaduan/proses', [\App\Http\Controllers\Admin\PengaduanController::class, 'ubahStatus'])->name('pengaduan.ubahStatus');
+        Route::get('admin/pengaduan/selesai', [\App\Http\Controllers\Admin\PengaduanController::class, 'selesai'])->name('pengaduan.selesai');
         Route::get('pengaduan/show/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'show'])->name('pengaduan.show');
         Route::delete('pengaduan/delete/{id_pengaduan}', [\App\Http\Controllers\Admin\PengaduanController::class, 'destroy'])->name('pengaduan.delete');
 
@@ -71,11 +72,12 @@ Route::prefix('admin')->group( function() {
        
        Route::post('/laporan/cetak', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan'])->name('laporan.get');
        Route::post('/laporan/export', [\App\Http\Controllers\Admin\LaporanController::class, 'export'])->name('laporan.export');
+        Route::get('/logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('admin.logout');
     });
 
     Route::middleware('isPetugas')->group( function() {
         Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('admin.logout');
+        // Route::get('/logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('admin.logout');
         //  Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
         // Pengaduan
         // Route::get('pengaduan/{status}', [\App\Http\Controllers\Admin\PengaduanController::class, 'index'])->name('pengaduan.index');
