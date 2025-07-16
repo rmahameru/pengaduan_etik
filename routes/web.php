@@ -70,7 +70,7 @@ Route::prefix('admin')->group( function() {
 
        Route::get('/laporan', [\App\Http\Controllers\Admin\LaporanController::class, 'index'])->name('laporan.index');
        
-       Route::post('/laporan/cetak', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan'])->name('laporan.get');
+       Route::post('/laporan', [\App\Http\Controllers\Admin\LaporanController::class, 'laporan'])->name('laporan.get');
        Route::post('/laporan/export', [\App\Http\Controllers\Admin\LaporanController::class, 'export'])->name('laporan.export');
         Route::get('/logout', [\App\Http\Controllers\Admin\AdminController::class, 'logout'])->name('admin.logout');
     });

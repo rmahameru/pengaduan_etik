@@ -19,25 +19,36 @@ class LaporanController extends Controller
         return view('pages.admin.laporan.index');
     }
 
-    public function laporan(Request $request) {
-        date_default_timezone_set('Asia/Bangkok');
 
-        $date_from = $request->input('date_from');
-        $date_to = $request->input('date_to');
+    public function laporan(Request $request)
+    {
+        $awal = $request->tanggal_awal;
+        $akhir = $request->tanggal_akhir;
 
-        $pengaduan = Pengaduan::query();
+        $pengaduan = Pengaduan::whereBetween('tgl_pengaduan', [$awal, $akhir])->get();
 
-        if($date_from) {
-            $pengaduan->where('tgl_pengaduan', '>=', $date_from ?? '2021-01-01 00:00:00')->where('tgl_pengaduan', '<=', $date_to . ' 23:59:59' ?? date('Y-m-d H:i:s'));
-        }
-
-        return view('pages.admin.laporan.index', [
-            'pengaduan' => $pengaduan->get(),
-            'from' => $date_from,
-            'to' => $date_to,
-        ]);
+        return view('pages.admin.laporan.index', compact('pengaduan', 'awal', 'akhir'));
     }
 
+    // public function laporan(Request $request) {
+    //     date_default_timezone_set('Asia/Bangkok');
+
+    //     $date_from = $request->input('date_from');
+    //     $date_to = $request->input('date_to');
+
+    //     $pengaduan = Pengaduan::query();
+
+    //     if($date_from) {
+    //         $pengaduan->where('tgl_pengaduan', '>=', $date_from ?? '2021-01-01 00:00:00')->where('tgl_pengaduan', '<=', $date_to . ' 23:59:59' ?? date('Y-m-d H:i:s'));
+    //     }
+
+    //     return view('pages.admin.laporan.index', [
+    //         'pengaduan' => $pengaduan->get(),
+    //         'from' => $date_from,
+    //         'to' => $date_to,
+    //     ]);
+    // }
+    
     public function export(Request $request) {
         date_default_timezone_set('Asia/Bangkok');
 
