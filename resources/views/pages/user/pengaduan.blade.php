@@ -42,7 +42,6 @@
                     <option value="" disabled {{ old('status_civitas') ? '' : 'selected' }}>-- Pilih Status --</option>
                     <option value="Dosen" {{ old('status_civitas') == 'Dosen' ? 'selected' : '' }}>Dosen</option>
                     <option value="Tendik" {{ old('status_civitas') == 'Tenaga Kependidikan' ? 'selected' : '' }}>Tenaga Kependidikan</option>
-                    
                 </select>
                 @error('status_civitas')
                     <div class="invalid-feedback">
@@ -64,10 +63,9 @@
                 <label for="kategori_pelanggaran" class="form-label">Kategori Pelanggaran</label>
                 <select name="kategori_pelanggaran" id="kategori_pelanggaran" class="form-control @error('kategori_pelanggaran') is-invalid @enderror" required>
                     <option value="" disabled {{ old('kategori_pelanggaran') ? '' : 'selected' }}>-- Pilih Kategori --</option>
-                    <option value="Berpakaian tidak sesuai aturan" {{ old('kategori_pelanggaran') == 'Berpakaian tidak sesuai aturan' ? 'selected' : '' }}>Berpakaian tidak sesuai aturan</option>
-                    <option value="Perilaku tidak sopan" {{ old('kategori_pelanggaran') == 'Perilaku tidak sopan' ? 'selected' : '' }}>Perilaku tidak sopan</option>
-                    <option value="Terlambat" {{ old('kategori_pelanggaran') == 'Terlambat' ? 'selected' : '' }}>Terlambat</option>
-                    <option value="Lainnya" {{ old('kategori_pelanggaran') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                    <option value="Ringan" {{ old('kategori_pelanggaran') == 'Ringan' ? 'selected' : '' }}>Ringan</option>
+                    <option value="Sedang" {{ old('kategori_pelanggaran') == 'Sedang' ? 'selected' : '' }}>Sedang</option>
+                    <option value="Berat" {{ old('kategori_pelanggaran') == 'Berat' ? 'selected' : '' }}>Berat</option>
                 </select>
                 @error('kategori_pelanggaran')
                     <div class="invalid-feedback">

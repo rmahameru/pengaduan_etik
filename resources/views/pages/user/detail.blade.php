@@ -48,7 +48,7 @@
                             <td>
                                 @switch($pengaduan->status)
                                     @case('0')
-                                        <span class="badge bg-danger text-white">Pending</span>
+                                        <span class="badge bg-danger text-white">Menunggu Verifikasi</span>
                                     @break
 
                                     @case('proses')

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Laporan Pengaduan</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Laporan Pengaduan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
 </head>
 {{-- <body>
 	<style type="text/css">
@@ -15,141 +18,141 @@
 		<h5>Laporan Pengaduan</h4>
 	</center> --}}
 
-    <body>
+<body>
 
-   <style>
-      .page-break{
-         page-break-after:always;
-       }
-      .text-center{
-         text-align:center;
-       }
-      .text-header {
-         font-size:1.1rem;
-      }
-      .size2 {
-         font-size:1.4rem;
-      }
-      .border-bottom {
-         border-bottom:1px black solid;
-      }
-      .border {
-         border: 2px block solid;
-      }
-      .border-top {
-         border-top:1px black solid;
-      }
-      .float-right {
-         float:right;
-      }
-      .mt-4 {
-         margin-top:4px;
-       }
-      .mx-1 {
-         margin:1rem 0 1rem 0;
-      }
-      .mr-1 {
-         margin-right:1rem;
-      }
-      .mt-1 {
-         margin-top:1rem;
-      }
-      ml-2 {
-         margin-left:2rem;
-      }
-      .ml-min-5 {
-         margin-left:-5px;
-      }
-      .text-uppercase {
-         font:uppercase;
-      }
-      .d1 {
-         font-size:2rem;
-      }
-      .img {
-         position:absolute;
-      }
-      .link {
-         font-style:underline;
-      }
-      .text-desc {
-         font-size:14px;
-      }
-      .text-bold {
-         font-style:bold;
-      }
-      .underline {
-         text-decoration:underline;
-      }
-      table {
-         font-family: Arial, Helvetica, sans-serif;
-         color: #666;
-         text-shadow: 1px 1px 0px #fff;
-         background: #eaebec;
-         border: #ccc 1px solid;
-      }
-      table th {
-           padding: 10px 15px;
-           border-left:1px solid #e0e0e0;
-           border-bottom: 1px solid #e0e0e0;
-           background: #ededed;
-       }
-       table tr {
-           text-align: center;
-            padding-left: 20px;
-       }
-       table td {
-             padding: 10px 15px;
-             border-top: 1px solid #ffffff;
-             border-bottom: 1px solid #e0e0e0;
-             border-left: 1px solid #e0e0e0;
-             background: #fafafa;
-             background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
-             background: -moz-linear-gradient(top, #fbfbfb, #fafafa);
-      }
-      .table-center {
-         margin-left:auto;
-         margin-right:auto;
-      }
-      .mb-1 {
-         margin-bottom:1rem;
-      }
-   </style>
+    <style>
+        @media print {
+            @page {
+                size: A4 landscape;
+                /* A4 dan posisi landscape */
+                margin: 20mm;
+            }
 
-   <hr class="border">
+            .no-print {
+                display: none;
+            }
+        }
 
-   <!-- content -->
+        body {
+            position: relative;
+            height: 29.7cm;
+            width: 100%;
+            margin: auto;
+            color: #001028;
+            background: #FFFFFF;
+            font-size: 13px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
 
-   <div class="size2 text-center mb-1">LAPORAN PENGADUAN MASYARAKAT</div>
+        .laporan-title {
+            font-size: 18pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 6px;
+        }
 
-	<table class="table">
+        .periode {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 10pt;
+            color: #333;
+        }
+
+        th,
+        td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        img {
+            max-width: 70px;
+            height: auto;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 9pt;
+        }
+
+        .bg-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .bg-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .bg-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .bg-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+    </style>
+
+
+    <hr class="border">
+
+    <!-- content -->
+ <header>
+        <img src="{{ asset( 'assets/images/Logo Poltekkes Kemenkes Surabaya.png')}}" class="topleft">
+        {{-- <img src="assets/images/logo-4.png" class="topright"> --}}
+    </header>
+ <div style="font-size:2rem; font-weight:bold; text-align:center; margin-bottom:1rem;">
+    LAPORAN PENGADUAN KODE ETIK BULAN {{ $tanggal1 }} sampai {{ $tanggal2 }}
+</div>
+
+    <table class="table">
         <thead>
             <tr>
                 <th>No</th>
                 <th>Tanggal Pengaduan</th>
-                <th>Nama</th>
-                <th>Judul Laporan</th>
+                <th>Nama Pelapor</th>
+                <th>Nama Pelanggar</th>
                 <th>Isi Laporan</th>
                 <th>Tanggal Kejadian</th>
                 <th>Lokasi Kejadian</th>
                 <th>Status</th>
+                <th>Bukti</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($pengaduan as $k => $i)
-            <tr>
-                <td>{{ $k += 1 }}.</td>
-                <td>{{ Carbon\Carbon::parse($i->tgl_pengaduan)->format('d-m-Y') }}</td>
-                <td>{{ $i->user->name }}</td>
-                <td>{{ $i->judul_laporan }}</td>
-                <td>{{ $i->isi_laporan }}</td>
-                <td>{{ Carbon\Carbon::parse($i->tgl_kejadian)->format('d-m-Y') }}</td>
-                <td>{{ $i->lokasi_kejadian }}</td>
-                <td>{{ $i->status }}</td>
-            </tr>
+            @foreach ($pengaduan as $k => $i)
+                <tr>
+                    <td>{{ $k += 1 }}.</td>
+                    <td>{{ Carbon\Carbon::parse($i->tgl_pengaduan)->format('d-m-Y') }}</td>
+                    <td>{{ $i->nama_pelapor }}</td>
+                    <td>{{ $i->nama_pelanggar }}</td>
+                    <td>{{ $i->isi_laporan }}</td>
+                    <td>{{ Carbon\Carbon::parse($i->tgl_kejadian)->format('d-m-Y') }}</td>
+                    <td>{{ $i->lokasi_kejadian }}</td>
+                    <td>{{ $i->status }}</td>
+                    <td>{{ $i->bukti }}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>
 
 </body>
+
 </html>

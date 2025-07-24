@@ -86,7 +86,7 @@ section
 
 body
 {
-    font-family: Open Sans, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -246,7 +246,7 @@ code,
 kbd,
 samp
 {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
 }
 
@@ -323,7 +323,7 @@ select,
 optgroup,
 textarea
 {
-    font-family: inherit;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: inherit;
     line-height: inherit;
 
@@ -493,7 +493,7 @@ h6,
 .h5,
 .h6
 {
-    font-family: inherit;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
     line-height: 1.5;
 
@@ -3358,8 +3358,8 @@ fieldset:disabled a.btn
 .btn-primary:hover
 {
     color: #fff;
-    border-color: #5e72e4;
-    background-color: #5e72e4;
+    border-color: #1977cc;
+    background-color: #1977cc;
 }
 .btn-primary:focus,
 .btn-primary.focus
@@ -8156,7 +8156,7 @@ a.close.disabled
 
 .tooltip
 {
-    font-family: Open Sans, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: .875rem;
     font-weight: 400;
     font-style: normal;
@@ -8303,7 +8303,7 @@ a.close.disabled
 
 .popover
 {
-    font-family: Open Sans, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: .875rem;
     font-weight: 400;
     font-style: normal;
@@ -17613,7 +17613,7 @@ button.bg-darker:focus
 
 .text-monospace
 {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !important;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .text-justify
@@ -18851,7 +18851,7 @@ a.btn-icon-only
 
 .btn-icon-clipboard
 {
-    font-family: inherit;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.25;
@@ -19582,7 +19582,7 @@ a.btn-icon-only
 
 .custom-toggle-slider:after
 {
-    font-family: inherit;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: .75rem;
     font-weight: 600;
     line-height: 24px;
@@ -20304,7 +20304,7 @@ textarea[resize='horizontal']
 .has-success:after,
 .has-danger:after
 {
-    font-family: 'NucleoIcons';
+    font-family: 'Arial';
     font-size: 9px;
     line-height: 19px;
 
@@ -21480,7 +21480,7 @@ textarea[resize='horizontal']
 }
 .navbar-vertical .navbar-nav .nav-link[data-toggle='collapse']:after
 {
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Arial';
     font-weight: 700;
     font-style: normal;
     font-variant: normal;
@@ -21557,8 +21557,7 @@ textarea[resize='horizontal']
 
     align-items: stretch;
 }
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
-{
+@media (forced-colors: active) {
     .navbar-vertical.navbar-expand-xs > [class*='container']
     {
         height: 100%;
@@ -21673,7 +21672,7 @@ textarea[resize='horizontal']
         align-items: stretch;
     }
 }
-@media all and (min-width: 576px) and (-ms-high-contrast: none), (min-width: 576px) and (-ms-high-contrast: active)
+@media all and (min-width: 576px) and (forced-color-adjust: none), (min-width: 576px) and (forced-color-adjust: none)
 {
     .navbar-vertical.navbar-expand-sm > [class*='container']
     {
@@ -26382,7 +26381,7 @@ table.dataTable tbody > tr.selected
 
 .fc-icon
 {
-    font-family: NucleoIcons, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     line-height: 35px;
 
@@ -27278,7 +27277,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
 .ql-container
 {
-    font-family: Open Sans, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ql-toolbar

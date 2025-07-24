@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 @extends('layouts.admin')
 @section('title', 'Laporan')
 
@@ -14,11 +16,11 @@
                     <div class="col-lg-6 col-7">
                         <h6 class="h2 text-white d-inline-block mb-0">Laporan</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            {{-- <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Lihat</li>
                                 <li class="breadcrumb-item"><a href="#">Laporan</a></li>
-                            </ol>
+                            </ol> --}}
                         </nav>
                     </div>
                 </div>
@@ -36,17 +38,21 @@
                     <div class="card-body">
                         <form action="{{ route('laporan.get') }}" method="POST">
                             @csrf
-                            <div class="form-group">
-                                <input type="text" name="date_from" class="form-control" placeholder="Tanggal Awal"
-                                    onfocusin="(this.type='date')" onfocusout="(this.type='text')"
-                                    value="{{ $from ?? '' }}">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="date_from">Tanggal Awal</label>
+                                    <input type="date" id="date_from" name="date_from" class="form-control"
+                                        value="{{ old('date_from', $start_date ?? '') }}" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="date_to">Tanggal Akhir</label>
+                                    <input type="date" id="date_to" name="date_to" class="form-control"
+                                        value="{{ old('date_to', $end_date ?? '') }}" required>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100">Cari Laporan</button>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" name="date_to" class="form-control" placeholder="Tanggal Akhir"
-                                    onfocusin="(this.type='date')" onfocusout="(this.type='text')"
-                                    value="{{ $to ?? '' }}">
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3" style="width: 100%">Cari Laporan</button>
                         </form>
                     </div>
                 </div>
@@ -60,82 +66,92 @@
                             </div>
                             <div class="col text-right">
                                 @if ($pengaduan ?? '')
-                                    <form action="{{ route('laporan.export') }}" method="POST">
+                                    <form action="{{ route('laporan.export') }}" method="POST" class="mt-3">
                                         @csrf
-                                        <input type="hidden" name="date_from" value="{{ $from }}">
-                                        <input type="hidden" name="date_to" value="{{ $to }}">
-                                        <button type="submit" class="btn btn-info">Export PDF</button>
+                                        <input type="hidden" name="start_date" value="{{ $start_date }}">
+                                        <input type="hidden" name="end_date" value="{{ $end_date }}">
+                                        <button type="submit" class="btn btn-info">
+                                            <i class="fas fa-file-pdf"></i> Export PDF
+                                        </button>
                                     </form>
                                 @endif
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        @if ($pengaduan ?? '')
-                            <table class="table">
+                        {{-- @if ($pengaduan ?? '') --}}
+                         {{-- <p class="mb-2">Jumlah data ditemukan: {{ $pengaduan->count() }}</p> --}}
+                            <table id="pengaduanTable" class="table table-bordered">
                                 <thead>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th>No</th>
-                                                <th>Tgl Pengaduan</th>
-                                                <th>Nama</th>
-                                                <th>Judul Laporan</th>
-                                                <th>Isi Laporan</th>
-                                                <th>Tgl Kejadian</th>
-                                                <th>Lokasi Kejadian</th>
-                                                <th>Status</th>
-                                                <th>Bukti Foto</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($pengaduan as $k => $i)
-                                                <tr>
-                                                    <td class="text-center">{{ $k + 1 }}.</td>
-
-                                                    <td>{{ \Carbon\Carbon::parse($i->tgl_pengaduan)->format('d-m-Y') }}</td>
-
-                                                    {{-- Ambil nama pelapor dari relasi masyarakat atau user --}}
-                                                    <td>{{ optional($i->masyarakat)->name ?? (optional($i->user)->name ?? '-') }}
-                                                    </td>
-
-                                                    {{-- Judul laporan disesuaikan dari kategori --}}
-                                                    <td>{{ $i->kategori_pelanggaran ?? '-' }}</td>
-
-                                                    <td>{{ \Illuminate\Support\Str::limit($i->isi_laporan, 50, '...') }}
-                                                    </td>
-
-                                                    <td>{{ \Carbon\Carbon::parse($i->tgl_kejadian)->format('d-m-Y') }}</td>
-
-                                                    <td>{{ $i->lokasi_kejadian ?? '-' }}</td>
-
-                                                    <td class="text-center">
-                                                        @if ($i->status == '0' || $i->status == 'menunggu verifikasi')
-                                                            <span class="badge badge-danger">Menunggu Verifikasi</span>
-                                                        @elseif($i->status == 'proses')
-                                                            <span class="badge badge-warning">Proses</span>
-                                                        @elseif($i->status == 'selesai')
-                                                            <span class="badge badge-success">Selesai</span>
-                                                        @else
-                                                            <span class="badge badge-secondary">{{ $i->status }}</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($i->foto)
-                                                            <img src="{{ asset('storage/foto/' . $i->foto) }}"
-                                                                width="60" height="60" class="img-thumbnail">
-                                                        @else
-                                                            <span class="text-muted">Belum ada</span>
-                                                        @endif
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-
-
-                        @endif
+                                    <tr style="text-align: center;">
+                                        <th scope="col" class="sort" data-sort="no">No</th>
+                                        <th scope="col" class="sort" data-sort="tgl_kejadian">Tanggal</th>
+                                        <th scope="col" class="sort" data-sort="nama_pelapor">Nama Pelapor</th>
+                                        <th scope="col" class="sort" data-sort="nama_pelanggar">Nama Pelanggar</th>
+                                        <th scope="col" class="sort" data-sort="status_pelanggar">Status Pelanggar</th>
+                                        <th scope="col" class="sort" data-sort="kategori_pelanggaran">Kategori Pelanggaran</th>
+                                        <th scope="col" class="sort" data-sort="isi_laporan">Isi Laporan</th>
+                                        <th scope="col" class="sort" data-sort="lokasi_kejadian">Lokasi Kejadian</th>
+                                        <th scope="col" class="sort" data-sort="status">Status</th>
+                                        {{-- <th scope="col" class="sort" data-sort="action">Aksi</th> --}}
+                                        <th scope="col" class="sort" data-sort="foto">Bukti</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($pengaduan as $v)
+                                        <tr>
+                                            {{-- <td class="budget">
+                                                <span class="text-sm">{{ $k += 1 }}</span>
+                                            </td> --}}
+                                            <td>
+                                                <span
+                                                    class="text-sm">{{ \Carbon\Carbon::parse($v->tgl_pengaduan)->format('d-m-Y') }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-sm">{{ $v->nama_pelapor ?? '-' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-sm">{{ $v->nama_pelanggar ?? '-' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-sm">{{ $v->status_civitas ?? '-' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-sm">{{ $v->kategori_pelanggaran ?? '-' }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-sm">{{ Str::limit($v->isi_laporan, 30) }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="text-sm">{{ $v->lokasi_kejadian ?? '-' }}</span>
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($i->status == '0' || $i->status == 'menunggu verifikasi')
+                                                    <span class="badge badge-danger">Menunggu Verifikasi</span>
+                                                @elseif($i->status == 'proses')
+                                                    <span class="badge badge-warning">Proses</span>
+                                                @elseif($i->status == 'selesai')
+                                                    <span class="badge badge-success">Selesai</span>
+                                                @else
+                                                    <span class="badge badge-secondary">{{ $i->status }}</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($i->foto)
+                                                    <img src="{{ asset('storage/foto/' . $i->foto) }}" width="60"
+                                                        height="60" class="img-thumbnail">
+                                                @else
+                                                    <span class="text-muted">Belum ada</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        {{-- @else --}}
+                            {{-- <div class="alert alert-info">Tidak ada data pengaduan untuk rentang tanggal yang dipilih.
+                            </div> --}}
+                        {{-- @endif --}}
                     </div>
                 </div>
             </div>
